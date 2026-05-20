@@ -1,6 +1,216 @@
-.footer {
+.footer-container {
+    position: relative;
+    padding: 8rem 0 4rem;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border-top: 1px solid var(--border-color);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-max-wrapper {
+    width: 100%;
+    max-width: 1100px;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.footer-glow {
+    position: absolute;
+    right: -20%;
+    top: 30%;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+    filter: blur(100px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.footer-name {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    margin-bottom: 4rem;
+    color: var(--text-primary);
+    text-transform: uppercase;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-info-block {
+    margin-bottom: 3.5rem;
+}
+
+.footer-info-block:last-child {
+    margin-bottom: 0;
+}
+
+.footer-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.footer-text {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.hover-link {
+    transition: color 0.3s ease;
+}
+
+.hover-link:hover {
+    color: var(--accent-primary);
+}
+
+/* Socials Column */
+.social-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.social-list li {
+    width: max-content;
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.2rem 0;
+    margin-bottom: 0.8rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid var(--border-color);
+    min-width: 100px;
+}
+
+.social-arrow {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    transition: transform 0.3s ease, color 0.3s ease;
+    margin-left: 1rem;
+}
+
+.footer-link:hover {
+    border-bottom-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+.footer-link:hover .social-arrow {
+    transform: translate(2px, -2px);
+    color: var(--accent-primary);
+}
+
+/* Credits */
+.credit-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.credit-text .highlight {
+    color: var(--accent-primary);
+    font-weight: 500;
+}
+
+.copyright {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 3.5rem;
+}
+
+/* Resume button */
+.footer-resume-btn {
+    position: absolute;
+    bottom: 0;
+    right: 2rem;
+}
+
+.footer-resume-btn a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
     font-size: 0.8rem;
-    text-align: center;
-    background: linear-gradient(90deg, #303072 0%, #423477 100%);
-    padding: 1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.footer-resume-btn a {
+    position: relative;
+}
+
+.footer-resume-btn a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 1px;
+    background: var(--accent-primary);
+    transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.footer-resume-btn a:hover {
+    color: var(--accent-primary);
+}
+
+.footer-resume-btn a:hover::after {
+    width: 100%;
+}
+
+.footer-resume-btn a:hover .resume-icon {
+    transform: translate(2px, -2px) rotate(-8deg);
+}
+
+.resume-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+@media (max-width: 900px) {
+    .footer-container {
+        padding: 5rem 0;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .footer-resume-btn {
+        position: relative;
+        bottom: 0;
+        right: 0;
+        margin-top: 4rem;
+        display: flex;
+        justify-content: flex-end;
+    }
 }

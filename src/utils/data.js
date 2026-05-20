@@ -1,78 +1,47 @@
-export const SKILLS = [
-	{
-		title: "Frontend",
-		icon: "https://img.icons8.com/color/48/000000/react-native.png",
-		skills: [
-			{ skill: "HTML5", percentage: "90%" },
-			{ skill: "CSS3", percentage: "90%" },
-			{ skill: "JavaScript", percentage: "70%" },
-			{ skill: "ReactJS", percentage: "80%" },
-		],
-	},
-	{
-		title: "Backend",
-		icon: "https://img.icons8.com/color/48/000000/nodejs.png",
-		skills: [
-			{ skill: "NodeJS", percentage: "50%" },
-			{ skill: "ExpressJS", percentage: "50%" },
-			{ skill: "MongoDB", percentage: "70%" },
-		],
-	},
-	{
-		title: "Programming",
-		icon: "https://img.icons8.com/color/48/000000/python.png",
-		skills: [
-			{ skill: "Python", percentage: "75%" },
-			{ skill: "Java", percentage: "85%" },
-		],
-	},
-	{
-		title: "Tools",
-		icon: "https://img.icons8.com/color/48/000000/git.png",
-		skills: [
-			{ skill: "Git and GitHub", percentage: "85%" },
-			{ skill: "Visual Studio Code", percentage: "95%" },
-			{ skill: "Responsive Design", percentage: "80%" },
-		],
-	},
-	{
-		title: "Soft Skills",
-		icon: "https://img.icons8.com/color/48/000000/git.png",
-		skills: [
-			{ skill: "Problem Solving", percentage: "90%" },
-			{ skill: "Collaboration", percentage: "100%" },
-			{ skill: "Attention to Detail", percentage: "100%" },
-		],
-	},
-];
+import {
+	SiPython, SiJavascript, SiTypescript, SiHtml5, SiGnubash,
+	SiReact, SiNextdotjs, SiBootstrap, SiNodedotjs, SiFlask, SiFastapi,
+	SiTensorflow, SiPytorch, SiOpencv, SiNumpy, SiTailwindcss, SiMysql,
+	SiMongodb, SiDocker, SiGit, SiGithub, SiLinux,
+	SiVercel, SiJupyter, SiFigma, SiPostman, SiHuggingface
+} from 'react-icons/si';
 
-export const WORK_EXPERIENCE = [
-	{
-		title: "GiveBack",
-		date: "March 2024",
-		responsibilities: [
-			"GiveBack is a full-stack web application that connects contributors to encourage a sense of community sharing while helping individuals in need of extra food, clothing, school supplies, household products, etc. The MERN stack is used in the application's development.",
-		],
-	},
-	{
-		title: "Shopping Manager System ",
-		date: "December 2023",
-		responsibilities: [
-			"I use! UML Diagrams and object-oriented design to construct a Java shopping system. It has file !ata storage and a console menu for managing users an! pro!ucts. The GUI computes pricing dynamically, lets users browse pro!ucts, and lets them add them to a cart. My software design and Java talents are demonstrated in this project.",
-		],
-	},
-	{
-		title: "Estate Agent Web Application",
-		date: "January 2024",
-		responsibilities: [
-			"I built a client-side web app inspired by rightmove.co.uk, allowing users to search properties by type, price, bedrooms, date added, and postcode region. Using HTML5 and React JS, it filters JSON property data for clear results with photos, descriptions, and prices. Detailed property pages feature thumbnails, tabs, and large photos. Users can easily bookmark favorites, while responsive design and security enhancements improve usability and appearance.",
-		],
-	},
-	{
-		title: "Theatre Management System",
-		date: "March 2023",
-		responsibilities: [
-			"I developed a Theatre Management System using Python, designed to streamline seat bookings and cancellations. Users can easily reserve seats, remove bookings if seats are already taken, and view real-time availability of seats for booking.",
-		],
-	},
+import { VscVscode, VscAzure } from 'react-icons/vsc';
+import { FaMicrosoft, FaCss3Alt, FaAws } from 'react-icons/fa';
+import { DiPhotoshop } from 'react-icons/di';
+
+export const TECH_STACK = [
+	{ skill: "Python", icon: SiPython, color: "#3776AB" },
+	{ skill: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
+	{ skill: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+	{ skill: "HTML", icon: SiHtml5, color: "#E34F26" },
+	{ skill: "CSS", icon: FaCss3Alt, color: "#1572B6" },
+	{ skill: "Bash", icon: SiGnubash, color: "#4EAA25" },
+	{ skill: "React", icon: SiReact, color: "#61DAFB" },
+	{ skill: "Next.js", icon: SiNextdotjs, color: "#ffffff" },
+	{ skill: "Bootstrap", icon: SiBootstrap, color: "#7952B3" },
+	{ skill: "Node.js", icon: SiNodedotjs, color: "#339939" },
+	{ skill: "Flask", icon: SiFlask, color: "#ffffff" },
+	{ skill: "FastAPI", icon: SiFastapi, color: "#009688" },
+	{ skill: "TensorFlow", icon: SiTensorflow, color: "#FF6F00" },
+	{ skill: "PyTorch", icon: SiPytorch, color: "#EE4C2C" },
+	{ skill: "OpenCV", icon: SiOpencv, color: "#5C3EE8" },
+	{ skill: "NumPy", icon: SiNumpy, color: "#013243" },
+	{ skill: "Tailwind", icon: SiTailwindcss, color: "#06B6D4" },
+	{ skill: "MySQL", icon: SiMysql, color: "#4479A1" },
+	{ skill: "MongoDB", icon: SiMongodb, color: "#47A248" },
+	{ skill: "Docker", icon: SiDocker, color: "#2496ED" },
+	{ skill: "Azure", icon: VscAzure, color: "#0078D4" },
+	{ skill: "Git", icon: SiGit, color: "#F05032" },
+	{ skill: "GitHub", icon: SiGithub, color: "#ffffff" },
+	{ skill: "Linux", icon: SiLinux, color: "#FCC624" },
+	{ skill: "AWS", icon: FaAws, color: "#FF9900" },
+	{ skill: "VS Code", icon: VscVscode, color: "#007ACC" },
+	{ skill: "Vercel", icon: SiVercel, color: "#ffffff" },
+	{ skill: "Jupyter", icon: SiJupyter, color: "#F37626" },
+	{ skill: "Figma", icon: SiFigma, color: "#F24E1E" },
+	{ skill: "Postman", icon: SiPostman, color: "#FF6C37" },
+	{ skill: "Photoshop", icon: DiPhotoshop, color: "#31A8FF" },
+	{ skill: "Hugging Face", icon: SiHuggingface, color: "#FFD21E" },
+	{ skill: "MS Office", icon: FaMicrosoft, color: "#D83B01" }
 ];

@@ -1,183 +1,213 @@
 .hero-container {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	position: relative;
+	padding: 12rem 0 4rem;
+	min-height: 100vh;
+	text-align: center;
+	overflow: hidden;
 }
 
-.hero-container::after,
 .hero-container::before {
-	content: " ";
-	width: 28.125rem;
-	height: 28.125rem;
-	border-radius: 28.125rem;
-	background: #7c66e3;
+	content: "";
 	position: absolute;
-	z-index: -1;
-	filter: blur(225px);
+	inset: 0;
+	background-image:
+		linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+	background-size: 60px 60px;
+	mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+	-webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+	z-index: 0;
+	pointer-events: none;
 }
 
 .hero-container::after {
-	top: -3rem;
-	left: -5rem;
+	content: "";
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 700px;
+	height: 700px;
+	background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 60%);
+	filter: blur(80px);
+	z-index: 0;
+	pointer-events: none;
+	opacity: 0.5;
+	animation: pulse-glow 8s ease-in-out infinite;
 }
 
-.hero-container::before {
-	bottom: 2rem;
-	right: 0rem;
-}
-
-.hero-content {
-	flex: 1;
-}
-
-.hero-content h2 {
-	font-size: 3.8rem;
-	font-weight: 600;
-	line-height: 5rem;
-	margin-bottom: 1rem;
-}
-
-.hero-content p {
-	width: 80%;
-	font-size: 1rem;
-	font-weight: 400;
-	line-height: 2rem;
-}
-
-.hero-img {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 2rem;
-	margin-top: 5rem;
-}
-
-.hero-img > div {
-	display: flex;
-	align-items: flex-end;
-	gap: 2rem;
-}
-
-.hero-img > div > img {
-	width: 25rem;
-	border-radius: 4rem;
-	transition: all 0.3s ease;
-}
-
-.tech-icon {
-	width: 5rem;
-	height: 5rem;
+.hero-bg {
+	position: absolute;
+	top: 3rem;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	text-align: center;
-	border-radius: 0.65rem;
-	border: 1.5px solid #6852ba;
+}
+
+.hero-bg-img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	object-position: center 30%;
+	opacity: 0.20;
+	filter: grayscale(100%) contrast(1.2);
+	mix-blend-mode: luminosity;
+	animation: imageFadeIn 2s ease-out;
+	transform: scale(1.05);
+	transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+	will-change: transform;
+}
+
+@keyframes imageFadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 0.20;
+	}
+}
+
+.hero-bg-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(to bottom, var(--bg-primary) 0%, transparent 40%, var(--bg-primary) 100%),
+		radial-gradient(circle at center, transparent 30%, var(--bg-primary) 90%);
+}
+
+
+.hero-content {
+	flex: 1;
+	max-width: 1000px;
+	animation: fadeInUp 0.8s ease;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	z-index: 10;
+}
+
+.hero-name {
+	font-size: clamp(4rem, 10vw, 8rem);
+	font-weight: 700;
+	line-height: 1;
+	margin-bottom: 1rem;
+	text-transform: uppercase;
+	letter-spacing: -0.04em;
+	color: var(--text-primary);
+	text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+	white-space: nowrap;
+}
+
+.hero-name span {
+	color: transparent;
+	-webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.6);
+	opacity: 0.9;
+}
+
+.hero-content h2 {
+	font-size: clamp(1.5rem, 4vw, 2.5rem);
+	font-weight: 500;
+	line-height: 1.3;
+	margin-bottom: 1.5rem;
+	letter-spacing: -0.02em;
+	color: var(--text-secondary);
+}
+
+.hero-content p {
+	max-width: 600px;
+	font-size: 1.1rem;
+	font-weight: 400;
+	line-height: 1.8;
+	color: var(--text-secondary);
+	margin-bottom: 3rem;
+}
+
+/* Tech Stack Container */
+.hero-tech-stack {
+	display: flex;
+	justify-content: center;
+	gap: 1.5rem;
+	animation: fadeInUp 1s ease 0.3s both;
+}
+
+.tech-icon {
+	width: 4rem;
+	height: 4rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--radius-lg);
+	border: 1px solid var(--glass-border);
+	background: var(--glass-bg);
+	backdrop-filter: var(--glass-blur);
+	-webkit-backdrop-filter: var(--glass-blur);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), var(--glass-inset);
+	transition: var(--transition-spring);
+	animation: float 4s ease-in-out infinite;
+}
+
+.tech-icon:nth-child(2) {
+	animation-delay: 0.4s;
+}
+
+.tech-icon:nth-child(3) {
+	animation-delay: 0.8s;
+}
+
+.tech-icon:nth-child(4) {
+	animation-delay: 1.2s;
 }
 
 .tech-icon img {
-	width: 3rem;
+	width: 2.2rem;
 	height: auto;
-	transition: all 0.3s ease;
+	transition: var(--transition-smooth);
+	filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
 }
 
-.hero-img > div > img:hover,
-.tech-icon img:hover {
-	transform: translateY(-0.5rem);
-}
-
-@media (max-width: 1025px) {
-	.hero-content h2 {
-		font-size: 3rem;
-		line-height: 4rem;
-	}
-
-	.hero-content p {
-		font-size: 0.9rem;
-		line-height: 1.6rem;
-	}
-
-	.hero-img > div > img {
-		width: 20rem;
-	}
-
-	.tech-icon {
-		width: 4rem;
-		height: 4rem;
-	}
-
-	.tech-icon img {
-		width: 2.5rem;
-	}
+.tech-icon:hover {
+	transform: translateY(-8px) scale(1.1);
+	border-color: var(--border-accent);
+	background: var(--bg-card-hover);
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 255, 255, 0.06), var(--glass-inset);
 }
 
 @media (max-width: 768px) {
 	.hero-container {
-		flex-direction: column;
+		padding: 9rem 1rem 3rem;
 	}
 
-	.hero-img {
-		margin: 2rem 0 2rem 0;
+	.hero-name {
+		font-size: clamp(3rem, 12vw, 5rem);
+		white-space: normal;
 	}
 
-	.hero-container h2 {
-		margin-top: 3rem;
+	.hero-name span {
+		-webkit-text-stroke: 1px var(--text-primary);
+		display: block;
 	}
 
-	.hero-content h2,
-	.hero-content p {
-		width: auto;
-		text-align: center;
-	}
-
-	.hero-container::after,
-	.hero-container::before {
-		content: " ";
-		width: 18rem;
-		height: 18rem;
-	}
-
-	.hero-container::after {
-		top: 0rem;
-		left: 0rem;
-	}
-
-	.hero-container::before {
-		bottom: 2rem;
-		right: 0rem;
-	}
-}
-
-@media (max-width: 600px) {
-	.hero-content h2 {
-		font-size: 2.2rem;
-		line-height: 3rem;
-	}
-
-	.hero-content p {
-		font-size: 0.8rem;
-		line-height: 1.3rem;
-	}
-
-	.hero-img {
+	.hero-tech-stack {
 		gap: 1rem;
-	}
-
-	.hero-img > div {
-		gap: 1rem;
-	}
-
-	.hero-img > div > img {
-		width: 16rem;
+		flex-wrap: wrap;
 	}
 
 	.tech-icon {
-		width: 3.3rem;
-		height: 3.3rem;
+		width: 3.5rem;
+		height: 3.5rem;
 	}
 
 	.tech-icon img {
-		width: 2rem;
+		width: 1.8rem;
 	}
 }
