@@ -2,8 +2,8 @@ import "./styles.css";
 
 const MARQUEE_ITEMS = [
     "Available for Work",
-    "Frontend Engineer",
-    "Full-Stack Developer",
+    "Full Stack Engineer",
+    "Full Stack Developer",
     "React · Next.js",
     "Design-Driven Code",
     "Based in Sri Lanka",

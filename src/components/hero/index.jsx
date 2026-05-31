@@ -33,7 +33,7 @@ const Hero = () => {
                 <h1 className='hero-name'>ISINDU <span>NIMANDITH</span></h1>
                 <h2>Building Digital Experiences That Inspire</h2>
                 <p>
-                    Passionate Frontend Developer | Transforming Ideas into Seamless and Visually Stunning Web Solutions
+                    Passionate Full Stack Developer | Transforming Ideas into Seamless and Visually Stunning Web Solutions
                 </p>
 
                 <div className='hero-tech-stack'>

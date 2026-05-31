@@ -64,10 +64,14 @@ export const repoToProject = (repo) => {
 	const Icon = iconForLanguage(language);
 	const themeColor = repo.languageColor || "#ffffff";
 
+	const repoUrl = repo.link || (owner && name ? `https://github.com/${owner}/${name}` : null);
+	const liveUrl = (repo.homepage || "").trim() || null;
+
 	return {
 		title: titleCase(name || ""),
 		repoName: name,
-		url: repo.link || (owner && name ? `https://github.com/${owner}/${name}` : null),
+		url: repoUrl,
+		liveUrl,
 		description: repo.description || `An open-source project on my GitHub profile.`,
 		features: synthesizeFeatures({
 			stars: repo.stars,

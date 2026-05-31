@@ -53,6 +53,7 @@ ProjectDetails.propTypes = {
         techStack: PropTypes.array.isRequired,
         themeColor: PropTypes.string,
         url: PropTypes.string,
+        liveUrl: PropTypes.string,
     }).isRequired,
     className: PropTypes.string,
 };
@@ -192,9 +193,11 @@ const WorkExperience = () => {
                         {projects.map((project, idx) => {
                             const previewImage = `https://opengraph.githubassets.com/1/${GITHUB_USERNAME}/${project.repoName}`;
 
-                            const CardWrapper = project.url ? "a" : "div";
-                            const wrapperProps = project.url
-                                ? { href: project.url, target: "_blank", rel: "noreferrer" }
+                            // Prefer the live/hosted site (GitHub "Website" field); fall back to the repo.
+                            const cardUrl = project.liveUrl || project.url;
+                            const CardWrapper = cardUrl ? "a" : "div";
+                            const wrapperProps = cardUrl
+                                ? { href: cardUrl, target: "_blank", rel: "noreferrer" }
                                 : {};
 
                             return (
@@ -228,7 +231,7 @@ const WorkExperience = () => {
                                         <span className="project-card-repo">
                                             {GITHUB_USERNAME}/{project.repoName}
                                         </span>
-                                        {project.url && (
+                                        {cardUrl && (
                                             <span className="project-card-cta">
                                                 View project <span aria-hidden="true">→</span>
                                             </span>

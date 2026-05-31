@@ -25,6 +25,32 @@ async function fetchFirstNonEmpty(username, signal) {
 	return [];
 }
 
+// Enrich each pinned repo with its GitHub "Website" (homepage) field so the
+// project cards can link to the live/hosted site instead of the repo page.
+async function enrichWithHomepage(repos, signal) {
+	return Promise.all(
+		repos.map(async (repo) => {
+			const owner = repo.owner || repo.author;
+			const name = repo.repo || repo.name;
+			if (!owner || !name) return repo;
+
+			try {
+				const res = await fetch(
+					`https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(name)}`,
+					{ signal, headers: { Accept: "application/vnd.github+json" } }
+				);
+				if (!res.ok) return repo;
+				const details = await res.json();
+				const homepage = (details.homepage || "").trim();
+				return homepage ? { ...repo, homepage } : repo;
+			} catch (err) {
+				if (err.name === "AbortError") throw err;
+				return repo;
+			}
+		})
+	);
+}
+
 export function useGithubPinned(username) {
 	const [repos, setRepos] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -40,8 +66,9 @@ export function useGithubPinned(username) {
 			try {
 				setLoading(true);
 				const data = await fetchFirstNonEmpty(username, controller.signal);
+				const enriched = await enrichWithHomepage(data, controller.signal);
 				if (!cancelled) {
-					setRepos(data);
+					setRepos(enriched);
 					setError(null);
 				}
 			} catch (err) {
