@@ -8,7 +8,7 @@ import "./styles.css";
 
 const GITHUB_USERNAME = "IsinduNimandith23";
 
-const ProjectDetails = ({ project, className = "" }) => (
+const ProjectDetails = ({ project, className = "", nested = false }) => (
     <div className={`project-details ${className}`}>
         <h3 className="project-title" style={{ color: project.themeColor }}>
             <span className="dash">-</span> {project.title}
@@ -32,16 +32,41 @@ const ProjectDetails = ({ project, className = "" }) => (
             ))}
         </div>
 
+        {/* When `nested`, this renders inside an <a> card wrapper, so the CTA must
+            not be an anchor (invalid <a>-in-<a> nesting). Use a role="link" span. */}
         {project.url && (
-            <a
-                className="project-cta"
-                href={project.url}
-                target="_blank"
-                rel="noreferrer"
-                style={{ borderColor: project.themeColor }}
-            >
-                View on GitHub →
-            </a>
+            nested ? (
+                <span
+                    className="project-cta"
+                    role="link"
+                    tabIndex={0}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        window.open(project.url, "_blank", "noopener,noreferrer");
+                    }}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            window.open(project.url, "_blank", "noopener,noreferrer");
+                        }
+                    }}
+                    style={{ borderColor: project.themeColor }}
+                >
+                    View on GitHub →
+                </span>
+            ) : (
+                <a
+                    className="project-cta"
+                    href={project.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{ borderColor: project.themeColor }}
+                >
+                    View on GitHub →
+                </a>
+            )
         )}
     </div>
 );
@@ -57,6 +82,7 @@ ProjectDetails.propTypes = {
         liveUrl: PropTypes.string,
     }).isRequired,
     className: PropTypes.string,
+    nested: PropTypes.bool,
 };
 
 const WorkExperience = () => {
@@ -252,8 +278,13 @@ const WorkExperience = () => {
                                         )}
                                     </div>
 
-                                    {/* Mobile-only inline details */}
-                                    <ProjectDetails project={project} className="project-details-mobile" />
+                                    {/* Mobile-only inline details. `nested` because this
+                                        sits inside the (possibly <a>) card wrapper. */}
+                                    <ProjectDetails
+                                        project={project}
+                                        className="project-details-mobile"
+                                        nested={CardWrapper === "a"}
+                                    />
                                 </CardWrapper>
                             );
                         })}

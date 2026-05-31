@@ -25,6 +25,38 @@ async function fetchFirstNonEmpty(username, signal) {
 	return [];
 }
 
+// Unauthenticated api.github.com calls are limited to 60/hr per IP. Cache the
+// fully enriched result so normal page loads don't re-hit the API (and trigger
+// 403 rate-limit errors) every time.
+const CACHE_TTL_MS = 1000 * 60 * 60 * 6; // 6 hours
+
+function cacheKey(username) {
+	return `gh-pinned:${username}`;
+}
+
+function readCache(username) {
+	try {
+		const raw = localStorage.getItem(cacheKey(username));
+		if (!raw) return null;
+		const { timestamp, repos } = JSON.parse(raw);
+		if (!Array.isArray(repos) || Date.now() - timestamp > CACHE_TTL_MS) return null;
+		return repos;
+	} catch {
+		return null;
+	}
+}
+
+function writeCache(username, repos) {
+	try {
+		localStorage.setItem(
+			cacheKey(username),
+			JSON.stringify({ timestamp: Date.now(), repos })
+		);
+	} catch {
+		/* localStorage unavailable or full — ignore */
+	}
+}
+
 // Enrich each pinned repo with its GitHub "Website" (homepage) field so the
 // project cards can link to the live/hosted site instead of the repo page.
 async function enrichWithHomepage(repos, signal) {
@@ -62,6 +94,17 @@ export function useGithubPinned(username) {
 		let cancelled = false;
 		const controller = new AbortController();
 
+		const cached = readCache(username);
+		if (cached) {
+			setRepos(cached);
+			setError(null);
+			setLoading(false);
+			return () => {
+				cancelled = true;
+				controller.abort();
+			};
+		}
+
 		(async () => {
 			try {
 				setLoading(true);
@@ -70,6 +113,7 @@ export function useGithubPinned(username) {
 				if (!cancelled) {
 					setRepos(enriched);
 					setError(null);
+					writeCache(username, enriched);
 				}
 			} catch (err) {
 				if (!cancelled && err.name !== "AbortError") {
