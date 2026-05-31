@@ -9,6 +9,10 @@
 const SCREENSHOTS = {
 	DRVSCAN: "./assets/images/projects/DRVSCAN.png",
 	Fallowkind: "./assets/images/projects/Fallowkind.png",
+	NewSagarikaDrivingSchool: "./assets/images/projects/NewSagarikaDrivingSchool.png",
+	Portfolio: "./assets/images/projects/Portfolio.png",
+	"Alumni-API": "./assets/images/projects/Alumni-API.png",
+	"Online-Shopping-Management-System": "./assets/images/projects/Online-Shopping-Management-System.png",
 };
 
 export const screenshotForRepo = (repoName) => SCREENSHOTS[repoName] || null;
