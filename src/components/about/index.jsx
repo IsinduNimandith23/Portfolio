@@ -17,7 +17,7 @@ const About = () => {
 
                 <div className="about-text">
                     <p>
-                        I transform complex ideas into high-speed, scalable web products. As an engineering-driven developer, I focus on the entire stack—prioritizing clean architecture, seamless performance, and modern solutions that drive real value.
+                        I transform complex ideas into high-speed, scalable web products. As an engineering-driven developer, I focus on the entire stack-prioritizing clean architecture, seamless performance, and modern solutions that drive real value.
                     </p>
                     <p>
                         Beyond writing code, I understand the product lifecycle. I've learned firsthand how to build, ship, and scale meaningful products in a fast-paced environment.

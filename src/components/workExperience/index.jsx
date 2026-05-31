@@ -11,7 +11,7 @@ const GITHUB_USERNAME = "IsinduNimandith23";
 const ProjectDetails = ({ project, className = "" }) => (
     <div className={`project-details ${className}`}>
         <h3 className="project-title" style={{ color: project.themeColor }}>
-            <span className="dash">—</span> {project.title}
+            <span className="dash">-</span> {project.title}
         </h3>
         <p className="project-desc">🚀 {project.description}</p>
         <ul className="project-features">
