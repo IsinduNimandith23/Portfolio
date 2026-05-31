@@ -4,6 +4,7 @@ import {
 	SiKotlin, SiSwift, SiDart, SiShell, SiMarkdown, SiGithub,
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa";
+import { liveUrlForRepo } from "./projectLinks";
 
 const LANGUAGE_ICONS = {
 	Python: SiPython,
@@ -65,7 +66,9 @@ export const repoToProject = (repo) => {
 	const themeColor = repo.languageColor || "#ffffff";
 
 	const repoUrl = repo.link || (owner && name ? `https://github.com/${owner}/${name}` : null);
-	const liveUrl = (repo.homepage || "").trim() || null;
+	// Prefer the explicit map (reliable); fall back to the API-provided homepage
+	// when available (it usually isn't, due to GitHub API rate limits).
+	const liveUrl = liveUrlForRepo(name) || (repo.homepage || "").trim() || null;
 
 	return {
 		title: titleCase(name || ""),
