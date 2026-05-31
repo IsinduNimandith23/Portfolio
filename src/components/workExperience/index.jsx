@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useGithubPinned } from "../../utils/useGithubPinned";
 import { repoToProject } from "../../utils/githubProject";
+import { screenshotForRepo } from "../../utils/projectScreenshots";
 import { useScrollReveal } from "../../utils/useScrollReveal";
 import "./styles.css";
 
@@ -191,7 +192,9 @@ const WorkExperience = () => {
                     {/* Right Side: Scrolling Cards */}
                     <div className="projects-right" ref={rightSideRef}>
                         {projects.map((project, idx) => {
-                            const previewImage = `https://opengraph.githubassets.com/1/${GITHUB_USERNAME}/${project.repoName}`;
+                            const githubCard = `https://opengraph.githubassets.com/1/${GITHUB_USERNAME}/${project.repoName}`;
+                            // Prefer a real homepage screenshot; fall back to GitHub's social card.
+                            const previewImage = screenshotForRepo(project.repoName) || githubCard;
 
                             // Prefer the live/hosted site (GitHub "Website" field); fall back to the repo.
                             const cardUrl = project.liveUrl || project.url;
@@ -208,6 +211,17 @@ const WorkExperience = () => {
                                 >
                                     <div className="project-card-media">
                                         <img
+                                            className="project-card-media-backdrop"
+                                            src={previewImage}
+                                            alt=""
+                                            aria-hidden="true"
+                                            loading="lazy"
+                                            onError={(e) => {
+                                                e.currentTarget.style.display = "none";
+                                            }}
+                                        />
+                                        <img
+                                            className="project-card-media-photo"
                                             src={previewImage}
                                             alt={`${project.title} preview`}
                                             loading="lazy"
